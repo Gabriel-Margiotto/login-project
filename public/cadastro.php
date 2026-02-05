@@ -37,7 +37,7 @@ session_start();
 if (empty($_SESSION["email"])) {
     if (isset($_POST["bt-cadastrar"])) {
 
-        require_once('conexao.php');
+        require_once('../app/conexao.php');
 
         $name_cadastro = $_POST["name-cadastro"];
         $email_cadastro = $_POST["email-cadastro"];

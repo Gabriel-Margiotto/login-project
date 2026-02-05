@@ -10,7 +10,7 @@
 <body>
     <h1>PAINEL DE CONTROLE</h1>
 
-    <a href="logout.php">Sair</a>
+    <a href="../app/logout.php">Sair</a>
 </body>
 
 </html>
