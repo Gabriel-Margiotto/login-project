@@ -1,7 +1,11 @@
 <?php
 
+$env = parse_ini_file(__DIR__ . '/.env');
+$host = $env["HOST"];
+$user = $env["USER"];
+$password = $env["PASSWORD"];
+$db = $env["DB"];
 
-require_once("config.php");
 $con = new mysqli($host, $user, $password, $db);
 
 if ($con->connect_errno) {
