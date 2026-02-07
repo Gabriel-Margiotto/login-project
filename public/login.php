@@ -18,7 +18,7 @@
 </style>
 
 <body class="bg-light">
-    <form action="login.php" method="POST" class="container">
+    <form action="login.php" method="POST" class="container-sm">
         <div class="row flex-column m-5">
             <h1 class="text-center fw-bold text-uppercase mb-md-4">Entrar</h1>
             <div class="input-group mb-3 w p-0 align-self-center">
@@ -30,8 +30,8 @@
                 <span class="input-group-text">Senha</span>
                 <input type="password" class="form-control" name="password" minlength="8" maxlength="16">
             </div>
-            <button type="button" name="bt-login"
-                class="btn btn-outline-success w align-self-center  mt-2">Logar</button>
+            <button type="submit" name="bt-login"
+                class="btn btn-outline-success w align-self-center mt-2">Logar</button>
             <p class="text-center">Não possui uma conta? <a
                     class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                     href="cadastro.php">Cadastrar</a></p>
@@ -76,7 +76,7 @@ if (empty($_SESSION["email"])) {
                 break;
 
             } else {
-                echo "Dados incorretos";
+                // echo "Dados incorretos";
                 break;
             }
         }

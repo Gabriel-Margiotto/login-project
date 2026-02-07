@@ -66,10 +66,10 @@ if (empty($_SESSION["email"])) {
 
         require_once('../app/conexao.php');
 
-        $name_cadastro = $_POST["name-cadastro"];
-        $email_cadastro = $_POST["email-cadastro"];
-        $password_cadastro = $_POST["password-cadastro"];
-        $password_confirm = $_POST["password-confirm"];
+        $name_cadastro = mysqli_real_escape_string($con, $_POST["name-cadastro"]);
+        $email_cadastro = mysqli_real_escape_string($con, $_POST["email-cadastro"]);
+        $password_cadastro = mysqli_real_escape_string($con, $_POST["password-cadastro"]);
+        $password_confirm = mysqli_real_escape_string($con, $_POST["password-confirm"]);
 
         $emails_consultar = $con->query("SELECT email FROM usuarios");
         $email_existe;
