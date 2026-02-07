@@ -18,25 +18,27 @@
 </style>
 
 <body class="bg-light">
-    <form action="cadastro.php" method="POST" class="container-sm">
+    <form action="cadastro.php" method="POST" class="container-sm needs-validation" novalidate>
         <div class="row m-5 flex-column">
             <h1 class="text-center fw-bold text-uppercase mb-md-4">Cadastro</h1>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">Nome Completo</span>
-                <input type="text" class="form-control" name="name-cadastro" minlength="4" maxlength="50">
+                <input type="text" class="form-control" name="name-cadastro" minlength="4" maxlength="50" required>
             </div>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">E-mail</span>
                 <input type="text" class="form-control" name="email-cadastro" minlength="4" maxlength="50"
-                    placeholder="nome@exemplo.com">
+                    placeholder="nome@exemplo.com" required>
             </div>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">Senha</span>
-                <input type="password" class="form-control" name="password-cadastro" minlength="8" maxlength="16">
+                <input type="password" class="form-control" name="password-cadastro" minlength="8" maxlength="16"
+                    required>
             </div>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">Confirmar senha</span>
-                <input type="password" class="form-control" name="password-confirm" minlength="8" maxlength="16">
+                <input type="password" class="form-control" name="password-confirm" minlength="8" maxlength="16"
+                    required>
             </div>
             <button type="submit" name="bt-cadastrar"
                 class="w mt-2 rounded btn btn-outline-success align-self-center">Cadastrar</button>
@@ -44,10 +46,12 @@
                     class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                     href="login.php">Login</a></p>
 
-            <div class="alert alert-danger w text-center align-self-center p-1 visually-hidden" role="alert">
-                Dados incorretos, revise!
+            <div class="alert alert-danger w text-center align-self-center p-1 visually-hidden" id="msg-incorrect"
+                role="alert">
+                As senhas não conferem!
             </div>
-            <div class="alert alert-warning w text-center align-self-center p-1 visually-hidden" role="alert">
+            <div class="alert alert-warning w text-center align-self-center p-1 visually-hidden" id="msg-email"
+                role="alert">
                 Esse e-mail já existe! <br> Clique para <a href="./login.php" class="alert-link">Entrar</a>.
             </div>
         </div>
@@ -57,6 +61,29 @@
 </body>
 
 </html>
+
+
+<script>
+
+    (() => {
+        'use strict'
+
+        const forms = document.querySelectorAll('.needs-validation')
+
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+
+</script>
 
 <?php
 session_start();
@@ -82,13 +109,7 @@ if (empty($_SESSION["email"])) {
         } // Final while - verifica se o email existe no banco de dados, caso sim retorna true
 
 
-        if (
-            !empty($name_cadastro) &&
-            !empty($email_cadastro) &&
-            !empty($password_cadastro) &&
-            !empty($password_confirm) &&
-            $password_cadastro == $password_confirm
-        ) {
+        if ($password_cadastro == $password_confirm) {
 
             if ($email_existe != true) {
 
@@ -103,11 +124,23 @@ if (empty($_SESSION["email"])) {
                 header("Location: dashboard.php");
                 exit;
             } else {
-                echo "<br> Email já cadastrado!";
+                echo "<script> 
+                    var emailmsg = document.getElementById('msg-email');
+                    emailmsg.classList.remove('visually-hidden');
+
+                    setInterval(() => { emailmsg.classList.add('visually-hidden'); }, 5000);
+                </script>";
+                exit;
             }
 
         } else {
-            // erro msg
+            echo "<script> 
+                    var passwordmsg = document.getElementById('msg-incorrect');
+                    passwordmsg.classList.remove('visually-hidden');
+
+                    setInterval(() => { passwordmsg.classList.add('visually-hidden'); }, 5000);
+                </script>";
+            exit;
 
         }
     } // Final IF botão de cadastro.

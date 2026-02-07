@@ -18,17 +18,17 @@
 </style>
 
 <body class="bg-light">
-    <form action="login.php" method="POST" class="container-sm">
+    <form action="login.php" method="POST" class="container-sm needs-validation" novalidate>
         <div class="row flex-column m-5">
             <h1 class="text-center fw-bold text-uppercase mb-md-4">Entrar</h1>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">E-mail</span>
                 <input type="email" class="form-control" name="email" minlength="10" maxlength="50"
-                    placeholder="nome@exemplo.com">
+                    placeholder="nome@exemplo.com" required>
             </div>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">Senha</span>
-                <input type="password" class="form-control" name="password" minlength="8" maxlength="16">
+                <input type="password" class="form-control" name="password" minlength="8" maxlength="16" required>
             </div>
             <button type="submit" name="bt-login"
                 class="btn btn-outline-success w align-self-center mt-2">Logar</button>
@@ -36,7 +36,8 @@
                     class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                     href="cadastro.php">Cadastrar</a></p>
 
-            <div class="alert alert-danger w p-2 align-self-center text-center visually-hidden" role="alert">
+            <div class="alert alert-danger w p-2 align-self-center text-center visually-hidden" id="msg-error"
+                role="alert">
                 Email ou senha inválidos.
             </div>
         </div>
@@ -44,6 +45,30 @@
 </body>
 
 </html>
+
+<script>
+
+
+    (() => {
+        'use strict'
+
+        const forms = document.querySelectorAll('.needs-validation')
+
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+
+
+</script>
 
 
 <?php
@@ -76,7 +101,15 @@ if (empty($_SESSION["email"])) {
                 break;
 
             } else {
-                // echo "Dados incorretos";
+
+                echo "
+                        <script> 
+                        var divmsg = document.getElementById('msg-error');
+                        divmsg.classList.remove('visually-hidden');
+
+                        setInterval(() => { divmsg.classList.add('visually-hidden');}, 3000);
+                        
+                        </script>";
                 break;
             }
         }
@@ -88,3 +121,5 @@ if (empty($_SESSION["email"])) {
     header("Location: dashboard.php");
     exit;
 }
+
+?>
