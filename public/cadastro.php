@@ -113,15 +113,14 @@ if (empty($_SESSION["email"])) {
 
             if ($email_existe != true) {
 
-                $hash = password_hash($_POST["password-cadastro"], PASSWORD_DEFAULT);
+                $hash = password_hash($password_cadastro, PASSWORD_DEFAULT);
                 $sql_enviar = "INSERT INTO usuarios (nome, email, senha) VALUES ('$name_cadastro', '$email_cadastro', '$hash')";
 
                 $con->query($sql_enviar);
                 $con->close();
 
-                $_SESSION["email"] = $email_cadastro;
 
-                header("Location: dashboard.php");
+                header("Location: login.php");
                 exit;
             } else {
                 echo "<script> 

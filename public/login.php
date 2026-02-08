@@ -80,39 +80,42 @@ if (empty($_SESSION["email"])) {
 
     if (isset($_POST["bt-login"])) {
 
-        $email_login = $_POST["email"];
-        $password_login = $_POST["password"];
+        $email_login = mysqli_real_escape_string($con, $_POST["email"]);
+        $password_login = mysqli_real_escape_string($con, $_POST["password"]);
 
-        $sql = "SELECT email, senha FROM usuarios;";
+        $sql = "SELECT idusuarios, nome, email, senha FROM usuarios WHERE email = '$email_login';";
         $results = $con->query($sql);
 
 
-        while ($row = mysqli_fetch_assoc($results)) {
+        $row = mysqli_fetch_assoc($results);
 
-            $password_rhash = password_verify($password_login, $row["senha"]);
+        @$password_rhash = password_verify($password_login, $row["senha"]);
 
-            if ($email_login == $row["email"] && $password_rhash) {
+        if ($email_login == @$row["email"] && $password_rhash) {
 
-                $_SESSION["email"] = $email_login;
-                $con->close();
+            $_SESSION["nome"] = $row["nome"];
+            $_SESSION["email"] = $email_login;
+            $_SESSION["id"] = $row["idusuarios"];
+            $con->close();
 
-                header("Location: dashboard.php");
+            header("Location: dashboard.php");
 
-                break;
 
-            } else {
 
-                echo "
-                        <script> 
-                        var divmsg = document.getElementById('msg-error');
-                        divmsg.classList.remove('visually-hidden');
+        } else {
 
-                        setInterval(() => { divmsg.classList.add('visually-hidden');}, 3000);
+            echo "
+                    <script> 
+                    var divmsg = document.getElementById('msg-error');
+                    divmsg.classList.remove('visually-hidden');
+
+                    setInterval(() => { divmsg.classList.add('visually-hidden');}, 3000);
                         
-                        </script>";
-                break;
-            }
+                    </script>";
+
         }
+
+
 
 
     }

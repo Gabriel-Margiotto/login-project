@@ -75,6 +75,7 @@ if (isset($_POST["bt-editar"])) {
         if ($resultado["email"] == $_SESSION["email"]) {
 
             $_SESSION["email"] = $email_alterado;
+            $_SESSION["nome"] = $nome_alterado;
 
         }
 

@@ -28,16 +28,19 @@
                     <div class="flex-shrink-0 dropdown">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-                                class="rounded-circle">
+                            <img src="..\assets\img\perfil.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#">Novo cadastro...</a></li>
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <p class="m-0" style="padding: 0 var(--bs-dropdown-item-padding-x);">
+                                Olá, </p>
+                            <p style="padding: 0 var(--bs-dropdown-item-padding-x);"><?php session_start();
+                            echo $_SESSION["nome"]; ?></p>
+                            <hr class="dropdown-divider">
+                            <li><a class="dropdown-item" href="editar.php/?id=<?= $_SESSION['id']; ?>">Perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Sair</a></li>
+                            <li><a class="dropdown-item" href="../app/logout.php">Sair</a></li>
                         </ul>
                     </div>
                 </div>
@@ -57,7 +60,7 @@
 
                 <?php
                 include_once("../app/conexao.php");
-                session_start();
+
 
                 if (empty($_SESSION["email"])) { // IF para verificar se o usuario está com sessão aberta.
                 
@@ -78,7 +81,7 @@
                             <ul class="d-flex justify-content-around p-0">
                                 <a href="editar.php/?id=<?= $dados['idusuarios']; ?>">
                                     <li class="d-inline"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="#1673E0" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            fill="#198754" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
                                                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fill-rule="evenodd"
@@ -88,7 +91,7 @@
 
                                 <a href="/crud/app/delete.php/?id=<?= $dados['idusuarios']; ?>">
                                     <li class="d-inline"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="#1673E0" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            fill="#198754" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                             <path
                                                 d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
                                         </svg></i></li>
@@ -101,14 +104,6 @@
                 ?>
             </tbody>
         </table>
-
-
-
-
-
-
-        <p class="text-center">Sessão: <?php
-        echo "{$_SESSION['email']}" ?> <a href="../app/logout.php">Deslogar</a></p>
     </div>
 
 </body>
