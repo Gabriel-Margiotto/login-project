@@ -19,6 +19,30 @@
 
 <body class="bg-light">
     <div class="container-sm">
+        <header class="py-3 mb-3 border-bottom">
+            <div class="container-fluid d-grid gap-2 align-items-center">
+                <div class=" d-flex justify-content-center">
+                    <form class="w-50 me-3">
+                        <input type=" search" class="form-control" placeholder="Procurar..." aria-label="Search">
+                    </form>
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="#">Novo cadastro...</a></li>
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sair</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
         <h1 class="text-center fw-bold text-uppercase mb-md-4">PAINEL DE CONTROLE</h1>
         <table class="table table-striped w m-auto">
             <thead>

@@ -27,7 +27,7 @@
             </div>
             <div class="input-group mb-3 w p-0 align-self-center">
                 <span class="input-group-text">E-mail</span>
-                <input type="text" class="form-control" name="email-cadastro" minlength="4" maxlength="50"
+                <input type="email" class="form-control" name="email-cadastro" minlength="4" maxlength="50"
                     placeholder="nome@exemplo.com" required>
             </div>
             <div class="input-group mb-3 w p-0 align-self-center">

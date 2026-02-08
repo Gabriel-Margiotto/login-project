@@ -63,6 +63,7 @@ $resultado = mysqli_fetch_assoc($row);
 
 <?php
 
+
 if (isset($_POST["bt-editar"])) {
 
     $nome_alterado = mysqli_real_escape_string($con, $_POST["nome_alterado"]);
@@ -70,6 +71,12 @@ if (isset($_POST["bt-editar"])) {
 
     try {
         $con->query("UPDATE usuarios SET nome = '$nome_alterado', email = '$email_alterado' WHERE idusuarios=$id");
+
+        if ($resultado["email"] == $_SESSION["email"]) {
+
+            $_SESSION["email"] = $email_alterado;
+
+        }
 
         header("Location: ../dashboard.php");
 
