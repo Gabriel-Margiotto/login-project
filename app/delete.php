@@ -4,7 +4,7 @@ include_once("conexao.php");
 session_start();
 
 
-$id = mysqli_real_escape_string($con, $_GET["id"]);
+$id = mysqli_real_escape_string($con, $_POST["id"]);
 
 $get_email = $con->query("SELECT email FROM usuarios WHERE idusuarios=$id");
 $resultado = mysqli_fetch_assoc($get_email);
